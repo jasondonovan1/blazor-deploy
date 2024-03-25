@@ -1,0 +1,17 @@
+﻿@page "/compound"
+
+
+<NumericInput LabelText="Enter Start Value: "  Class="numeric-input" Value="@Number" ValueChanged="@((decimal value) => Number = value)" />
+
+<NumericInput LabelText="Enter Periodic Additions: "  Class="numeric-input" Value="@NumberAdds" ValueChanged="@((decimal value) => NumberAdds = value)" />
+
+@code 
+{
+	// get the starting value
+	private decimal Number { get; set; } = 1000.0m; // Initial value set to 0
+
+	// get the periodic additions
+	private decimal NumberAdds { get; set; } = 1000.0m; // Initial value set to 0
+}
+
+
