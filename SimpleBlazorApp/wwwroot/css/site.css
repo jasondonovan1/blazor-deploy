@@ -9,6 +9,17 @@ html, body {
     margin-bottom: 15px; /* Spacing between inputs */
 }
 
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.input-group > * {
+        width: 200px;       /* Adjust based on your needs */
+        margin-right: 10px; /* Space between label and input */
+    }
+
 h1:focus {
     outline: none;
 }

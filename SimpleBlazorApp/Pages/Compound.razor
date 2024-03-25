@@ -5,13 +5,24 @@
 
 <NumericInput LabelText="Enter Periodic Additions: "  Class="numeric-input" Value="@NumberAdds" ValueChanged="@((decimal value) => NumberAdds = value)" />
 
+<button Class="input-group" @onclick="CalcServiceCompound">Calculate</button>
+
+<input Class="input-group" type="text" @bind="calculationResult" readonly />
+
 @code 
 {
 	// get the starting value
 	private decimal Number { get; set; } = 1000.0m; // Initial value set to 0
-
 	// get the periodic additions
-	private decimal NumberAdds { get; set; } = 1000.0m; // Initial value set to 0
+	private decimal NumberAdds { get; set; } = 100.0m; // Initial value set to 0
+	private CalcServiceCompund calculationService = new CalcServiceCompund();
+	private decimal calculationResult; // Holds the calculation result
+
+	private void CalcServiceCompound()
+	{
+		calculationResult = calculationService.CalculateSomething(Number, NumberAdds);
+		// Do something with the result
+	}
 }
 
 

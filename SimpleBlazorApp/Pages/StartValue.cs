@@ -30,12 +30,15 @@ namespace SimpleBlazorApp.Pages
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
 			builder.OpenElement(0, "div"); // Encapsulate label and input in a div
-			builder.AddContent(1, LabelText); // Static text
-			builder.OpenElement(2, "input");
-			builder.AddAttribute(3, "class", Class); // Apply the CSS class
-			builder.AddAttribute(4, "value", _displayValue);
-			builder.AddAttribute(5, "oninput", EventCallback.Factory.CreateBinder<string>(this, __value => _displayValue = __value, _displayValue));
-			builder.AddAttribute(6, "onblur", EventCallback.Factory.Create(this, () =>
+			builder.AddAttribute(1, "class", "input-group");
+			builder.OpenElement(2, "span"); // Container for the label
+			builder.AddContent(3, LabelText); // Static text
+			builder.CloseElement();
+			builder.OpenElement(4, "input");
+			builder.AddAttribute(5, "class", Class); // Apply the CSS class
+			builder.AddAttribute(6, "value", _displayValue);
+			builder.AddAttribute(7, "oninput", EventCallback.Factory.CreateBinder<string>(this, __value => _displayValue = __value, _displayValue));
+			builder.AddAttribute(8, "onblur", EventCallback.Factory.Create(this, () =>
 			{ 
 			  if (decimal.TryParse(_displayValue, NumberStyles.Any, CultureInfo.InvariantCulture, out var result))
 				{
@@ -48,7 +51,7 @@ namespace SimpleBlazorApp.Pages
 			builder.AddAttribute(8, "min", "0");
 
 			builder.CloseElement(); // Close input
-			builder.CloseElement(); // Close div
+			builder.CloseElement(); // Close flex container
 		}
 	}
 }
