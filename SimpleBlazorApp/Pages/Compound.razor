@@ -1,20 +1,52 @@
 ﻿@page "/compound"
 
+<PageTitle>Compound</PageTitle>
+
+<h1>Explore your future wealth...</h1>
+
+<div class="space-below5">This is our calculator that calculates an initial value compounded over 'x' years with an average '% apr' growth rate  </div>
+<p>
+	<br> Lets see the possible future values.....
+
+	<br>You start by entering an initial Start value, you can then select whether you make periodic additions i.e. £1000/year
+	
+	<br>Once you have selected an average growth rate and number of years, press calculate to get a forecasted future value.
+
+</p>
+
 
 <NumericInput LabelText="Enter Start Value: "  Class="numeric-input" Value="@Number" ValueChanged="@((decimal value) => Number = value)" />
 
 <NumericInput LabelText="Enter Periodic Additions: "  Class="numeric-input" Value="@NumberAdds" ValueChanged="@((decimal value) => NumberAdds = value)" />
 
-<button Class="input-group" @onclick="CalcServiceCompound">Calculate</button>
+<NumericInputInt LabelText="Enter Average % apr: " Class="numeric-input" Value="@NumberApr" ValueChanged="@((int value) => NumberApr = value)" />
 
-<input Class="input-group" type="text" @bind="calculationResult" readonly />
+<NumericInputInt LabelText="Enter Number of Years: " Class="numeric-input" Value="@Years" ValueChanged="@((int value) => Years = value)" />
+ 
+<p>
+	This is our sample site we deployed using github actions<br>
+</p>
+
+<div class="space-below">This content has space below it.</div>
+
+<div class="element-container">
+	<button class="btn-calculate" @onclick="CalcServiceCompound">Calculate</button>
+</div>
+
+<div class="element-container">
+	<input class="input-result" type="number" @bind="calculationResult" readonly />
+</div>
+
 
 @code 
 {
 	// get the starting value
-	private decimal Number { get; set; } = 1000.0m; // Initial value set to 0
+	private decimal Number { get; set; } = 1000.00m; // Initial value set to 0
 	// get the periodic additions
-	private decimal NumberAdds { get; set; } = 100.0m; // Initial value set to 0
+	private decimal NumberAdds { get; set; } = 100.00m; // Initial value set to 0
+	private int NumberApr { get; set; } = 1; // Initial value set to 7%
+	private int Years { get; set; } = 1; // Initial value set to 5
+	
 	private CalcServiceCompund calculationService = new CalcServiceCompund();
 	private decimal calculationResult; // Holds the calculation result
 

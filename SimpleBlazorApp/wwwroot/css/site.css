@@ -4,21 +4,62 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+.space-below {
+    margin-bottom: 50px; /* Adjust the value as needed */
+}
+
+.space-below5 {
+    margin-bottom: 5px; /* Adjust the value as needed */
+}
+
 .numeric-input {
     background-color: #f0f0f0; /* Light grey background */
     margin-bottom: 15px; /* Spacing between inputs */
 }
 
+/* Existing styles for input-group, assuming it works for your layout */
 .input-group {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.input-group > * {
-        width: 200px;       /* Adjust based on your needs */
+    .input-group > span {
+        width: 200px; /* Adjust based on your needs */
         margin-right: 10px; /* Space between label and input */
     }
+
+    /* Align NumericInput and input fields to the left */
+    .numeric-input input, .input-group input {
+        text-align: left;
+    }
+
+/* Ensure NumericInput components align well with your layout */
+.numeric-input {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically if that's your structure */
+    margin-bottom: 20px; /* Consistent with .input-group margin */
+}
+
+.numeric-input > span {
+        width: 200px; /* Consistent width with other inputs */
+        margin-bottom: 10px; /* Space between the NumericInput elements themselves */
+}
+
+.element-container {
+    margin-bottom: 30px; /* Adds space below each container */
+    text-align: left; /* Aligns child elements to the left */
+}
+
+.btn-calculate, .input-result {
+    width: auto; /* Prevents the button and input from stretching full width */
+    max-width: 200px; /* Sets a maximum width for the button and input */
+    display: inline-block; /* Ensures the element fills the width defined */
+}
+
+.input-result {
+    padding: 9px; /* Adds some padding inside the input for better text visibility */
+}
 
 h1:focus {
     outline: none;
@@ -82,3 +123,10 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+.error-message {
+    color: red;
+    margin-top: 5px;
+    font-size: 1.5rem;
+    min-width: 500px;
+}
