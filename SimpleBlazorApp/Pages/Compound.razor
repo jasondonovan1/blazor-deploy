@@ -24,10 +24,10 @@
 <NumericInputInt LabelText="Enter Number of Years: " Class="numeric-input" Value="@Years" ValueChanged="@((int value) => Years = value)" />
  
 <p>
-	This is our sample site we deployed using github actions<br>
+	
 </p>
 
-<div class="space-below">This content has space below it.</div>
+@*<div class="space-below">This content has space below it.</div>*@
 
 <div class="element-container">
 	<button class="btn-calculate" @onclick="CalcServiceCompound">Calculate</button>
@@ -52,7 +52,7 @@
 
 	private void CalcServiceCompound()
 	{
-		calculationResult = calculationService.CalculateSomething(Number, NumberAdds);
+		calculationResult = calculationService.CalculateSomething(Number, NumberAdds, NumberApr, Years);
 		// Do something with the result
 	}
 }

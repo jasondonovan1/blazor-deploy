@@ -2,10 +2,23 @@
 {
 	public class CalcServiceCompund
 	{
-		public decimal CalculateSomething(decimal number, decimal numberAdds)
+		public decimal CalculateSomething(decimal value, decimal periodic, int apr, int year)
 		{
-			// Your calculation logic here
-			return number + numberAdds; // Example calculation
+			decimal amount = value; // Start with the initial principal
+			decimal aprPer = apr / 100m;
+					
+			for (int i = 0; i < year; i++)
+			{
+				// Compound the current amount by the growth rate
+				amount *= (1 + aprPer);
+
+				// Then add the periodic payment, which will compound in subsequent years
+				// No need to adjust periodic here; if it's <= 0, it simply won't add to the amount
+				amount += periodic;
+			}
+
+			return amount;
 		}
+
 	}
 }
