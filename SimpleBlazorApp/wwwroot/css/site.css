@@ -49,6 +49,11 @@ html, body {
 .element-container {
     margin-bottom: 30px; /* Adds space below each container */
     text-align: left; /* Aligns child elements to the left */
+    display: flex; /* Use flexbox layout for alignment and spacing */
+    flex-direction: row; /* Align items in a row */
+    align-items: flex-start; /* Center items vertically */
+    gap: 20px; /* Creates space between items in the container */
+  
 }
 
 .btn-calculate, .input-result {

@@ -34,30 +34,47 @@
 
 <div class="element-container">
 	<button class="btn-calculate" @onclick="CalcServiceCompound">Calculate</button>
+	
 </div>
 
 <div class="element-container">
-	<input class="input-result" type="text" value="@FormattedCalculationResult" readonly />
+	<p>
+		End Value:(£)
+	</p>
+	<input class="input-result" type="text" value="@FormattedFinalAmount" readonly />
+	<p>
+		Profit:(£)
+	</p>
+	<input class="input-result" type="text" value="@FormattedProfit" readonly />
 </div>
+
 
 
 @code 
 {
+	private decimal finalAmount;
+	private decimal profit;
 	// get the starting value
 	private decimal Number { get; set; } = 1000.00m; // Initial value set to 0
-	// get the periodic additions
+														// get the periodic additions
 	private decimal NumberAdds { get; set; } = 100.00m; // Initial value set to 0
 	private int NumberApr { get; set; } = 1; // Initial value set to 7%
 	private int Years { get; set; } = 1; // Initial value set to 5
-	
+
 	private CalcServiceCompund calculationService = new CalcServiceCompund();
 	private decimal calculationResult; // Holds the calculation result
-	private string FormattedCalculationResult => calculationResult.ToString("N2", CultureInfo.InvariantCulture);
+	//private string FormattedCalculationResult => calculationResult.ToString("N2", CultureInfo.InvariantCulture);
+
+	private string FormattedFinalAmount => finalAmount.ToString("N2", CultureInfo.InvariantCulture);
+	private string FormattedProfit => profit.ToString("N2", CultureInfo.InvariantCulture);
+
+
 	private void CalcServiceCompound()
 	{
-		calculationResult = calculationService.CalculateSomething(Number, NumberAdds, NumberApr, Years);
-	    
+		 (finalAmount, profit) = calculationService.CalculateSomething(Number, NumberAdds, NumberApr, Years);
 	}
+	
+
 }
 
 
