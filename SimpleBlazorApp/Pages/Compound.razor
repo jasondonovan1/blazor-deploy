@@ -1,4 +1,7 @@
-﻿@page "/compound"
+﻿
+@page "/compound"
+@using System.Globalization
+
 
 <PageTitle>Compound</PageTitle>
 
@@ -34,7 +37,7 @@
 </div>
 
 <div class="element-container">
-	<input class="input-result" type="number" @bind="calculationResult" readonly />
+	<input class="input-result" type="text" value="@FormattedCalculationResult" readonly />
 </div>
 
 
@@ -49,11 +52,11 @@
 	
 	private CalcServiceCompund calculationService = new CalcServiceCompund();
 	private decimal calculationResult; // Holds the calculation result
-
+	private string FormattedCalculationResult => calculationResult.ToString("N2", CultureInfo.InvariantCulture);
 	private void CalcServiceCompound()
 	{
 		calculationResult = calculationService.CalculateSomething(Number, NumberAdds, NumberApr, Years);
-		// Do something with the result
+	    
 	}
 }
 
