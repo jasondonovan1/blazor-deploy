@@ -1,24 +1,101 @@
 ﻿@page "/"
-@inject IConfiguration Config
+@using System.Globalization
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Withdrawal</PageTitle>
 
-<h1>Hello!</h1>
+<h1>Explore how much you can withdraw from your balance...</h1>
 
-@* <p class="h4">
-    Default Connection String: defaultConnection
-</p> *@
-
+<div class="space-below5">This is our calculator that indicates how much you can withdraw over 'x' period of time, whilst your value maintains growth at '% apr'  </div>
 <p>
-    This page work in progress, go to other page
+	<br>Lets see what's' possible.....
+
+	<br>You start by entering an initial Start value, like a pension fund value, you then select how much you will withdraw each month.
+
+	<br>Finally you select the period of time in years that you will withdraw money, and the average % growth rate over the same period.
+
 </p>
 
-@code {
-    private string defaultConnection = "";
-     
 
-    protected override void OnInitialized()
-    {
-        defaultConnection = Config.GetConnectionString("Default") ?? "unknown";
-    }
+<NumericInput LabelText="Enter Start Balance: " Class="numeric-input" Value="@balance" ValueChanged="@((decimal value) => balance = value)" />
+
+<NumericInput LabelText="Enter Monthly Withdrawals: " Class="numeric-input" Value="@withdrawal" ValueChanged="@((decimal value) => withdrawal = value)" />
+
+<NumericInput LabelText="Enter Annual Charges %: " Class="numeric-input" Value="@manCharge" ValueChanged="@((decimal value) => manCharge = value)" />
+
+<NumericInputInt LabelText="Enter Average % apr: " Class="numeric-input" Value="@apr" ValueChanged="@((int value) => apr = value)" />
+
+<NumericInputInt LabelText="Enter Number of Years: " Class="numeric-input" Value="@years" ValueChanged="@((int value) => years = value)" />
+
+<p>
+
+</p>
+
+@*<div class="space-below">This content has space below it.</div>*@
+
+<div class="element-container">
+	<button class="btn-calculate" @onclick="CalcServiceWithdrawal">Calculate</button>
+
+</div>
+
+<div class="element-container">
+	<p>
+		End Balance:
+	</p>
+	<input class="input-result" type="text" value="@EndBalanceAmount" readonly />
+</div>
+
+<div class="element-container">
+	<p>
+		Time to Zero:
+	</p>
+	<input class="input-result" type="text" value="@YearsNever" readonly />
+</div>
+
+<div class="element-container">
+	<p>
+		Total Amount Withdrawn:
+	</p>
+	<input class="input-result" type="text" value="@WithdrawnTotal" readonly />
+</div>
+
+<div class="element-container">
+	<p>
+		Total Charges:
+	</p>
+	<input class="input-result" type="text" value="@ChargesTotal" readonly />
+</div>
+
+
+@code
+{
+	private decimal EndingBalance; // end balance calculation
+	private decimal TotalManCharges; // total of all management charges over the time period
+	private decimal withDrawn; // total of whats been taken out over the time period
+	private string YearsNever = "";  // how many years in decimal format to run out of money or 'never' 
+	// get the starting value
+	private decimal balance { get; set; } = 100000.00m; // Initial value set to 0
+														
+	// declare and initialise variable to be passed to the method for caculation on click
+	private decimal withdrawal { get; set; } = 1000.00m; // Initial value set to 0
+	private int apr { get; set; } = 1; // Initial value set to 1%
+	private decimal manCharge { get; set; } = 0; // initial value
+	private int years { get; set; } = 30; // Initial value set to 30
+
+	// declare new class
+	private CalcServiceWithdrawal calculationService = new CalcServiceWithdrawal();
+	
+	// format the returned values for display as a string and not decimal
+	private string EndBalanceAmount => EndingBalance.ToString("N2", CultureInfo.InvariantCulture);
+	private string WithdrawnTotal => withDrawn.ToString("N2", CultureInfo.InvariantCulture);
+	private string ChargesTotal => TotalManCharges.ToString("N2", CultureInfo.InvariantCulture);
+
+	// method called on click
+	private void CalcServiceWithdrawal()
+	{   // tuple results returned
+		(EndingBalance, YearsNever, withDrawn,TotalManCharges) = calculationService.CalculateWithdrawalPeriod(balance, withdrawal, apr, years, manCharge);
+	}
+
+
 }
+
+

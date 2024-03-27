@@ -4,7 +4,7 @@ namespace SimpleBlazorApp.Pages
 {
 
 	
-	public class CalcServiceCompund
+	public class CalcServiceCompound
 	{
 		public (decimal Amount, decimal Profit) CalculateSomething(decimal value, decimal periodic, int apr, int year)
 		{

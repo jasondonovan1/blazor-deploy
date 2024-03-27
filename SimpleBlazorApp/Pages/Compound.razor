@@ -9,7 +9,7 @@
 
 <div class="space-below5">This is our calculator that calculates an initial value compounded over 'x' years with an average '% apr' growth rate  </div>
 <p>
-	<br> Lets see the possible future values.....
+	<br>Lets see the possible future values.....
 
 	<br>You start by entering an initial Start value, you can then select whether you make periodic additions i.e. £1000/year
 	
@@ -39,14 +39,14 @@
 
 <div class="element-container">
 	<p>
-		End Value:(£)
+		End Balance:
 	</p>
 	<input class="input-result" type="text" value="@FormattedFinalAmount" readonly />
 </div>
 
 <div class="element-container">
 	<p>
-		Profit:(£)
+		Profit:
 	</p>
 	<input class="input-result" type="text" value="@FormattedProfit" readonly />
 </div>
@@ -64,7 +64,7 @@
 	private int NumberApr { get; set; } = 1; // Initial value set to 7%
 	private int Years { get; set; } = 1; // Initial value set to 5
 
-	private CalcServiceCompund calculationService = new CalcServiceCompund();
+	private CalcServiceCompound calculationService = new CalcServiceCompound();
 	private decimal calculationResult; // Holds the calculation result
 	//private string FormattedCalculationResult => calculationResult.ToString("N2", CultureInfo.InvariantCulture);
 

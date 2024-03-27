@@ -46,13 +46,12 @@ html, body {
         margin-bottom: 10px; /* Space between the NumericInput elements themselves */
 }
 
-.element-container {
-    margin-bottom: 30px; /* Adds space below each container */
-    text-align: left; /* Aligns child elements to the left */
-    display: flex; /* Use flexbox layout for alignment and spacing */
-    flex-direction: row; /* Align items in a row */
-    align-items: flex-start; /* Center items vertically */
-    gap: 20px; /* Creates space between items in the container */
+.element-container p,
+.element-container .input-result {
+    width: 195px; /* Example fixed width */
+    display: inline-block; /* Allows applying width to inline elements like <p> */
+    margin-right: 10px; /* Optional: Adds some space between the <p> and <input> */
+}
   
 }
 
@@ -63,7 +62,8 @@ html, body {
 }
 
 .input-result {
-    padding: 9px; /* Adds some padding inside the input for better text visibility */
+    padding: 5px; /* Adds some padding inside the input for better text visibility */
+    text-align: left; /* Aligns the input text to the right */
 }
 
 h1:focus {
