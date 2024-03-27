@@ -24,15 +24,18 @@ html, body {
     margin-bottom: 20px;
 }
 
-    .input-group > span {
+ .input-group > span {
         width: 200px; /* Adjust based on your needs */
         margin-right: 10px; /* Space between label and input */
     }
-
-    /* Align NumericInput and input fields to the left */
+/* Align NumericInput and input fields to the left */
     .numeric-input input, .input-group input {
         text-align: left;
     }
+
+ .input-group input.numeric-input {
+            margin-right: 20px; /* Adjust the space as needed */
+        }
 
 /* Ensure NumericInput components align well with your layout */
 .numeric-input {
@@ -41,10 +44,11 @@ html, body {
     margin-bottom: 20px; /* Consistent with .input-group margin */
 }
 
-.numeric-input > span {
+    .numeric-input > span {
         width: 200px; /* Consistent width with other inputs */
         margin-bottom: 10px; /* Space between the NumericInput elements themselves */
-}
+        min-width: 500px;
+    }
 
 .element-container p,
 .element-container .input-result {

@@ -27,15 +27,20 @@ namespace SimpleBlazorApp.Pages
 		[Parameter]
 		public string LabelText { get; set; }
 
+		[Parameter]
+		public string PostInputText { get; set; }
+
 		private string NumberYearsFormatted => Value.ToString("N0");
 
 		protected override void BuildRenderTree(RenderTreeBuilder builder)
 		{
 			builder.OpenElement(0, "div"); // Encapsulate label and input in a div
 			builder.AddAttribute(1, "class", "input-group");
+
 			builder.OpenElement(2, "span"); // Container for the label
 			builder.AddContent(3, LabelText); // Static text
 			builder.CloseElement();
+
 			builder.OpenElement(4, "input");
 			builder.AddAttribute(5, "type", "number"); // Ensure input type is number
 			builder.AddAttribute(6, "class", Class); // Apply the CSS class
@@ -47,7 +52,11 @@ namespace SimpleBlazorApp.Pages
 			builder.AddAttribute(11, "min", "1");
 			builder.CloseElement(); // Close input
 
-		    builder.CloseElement(); // Close flex container
+			builder.OpenElement(12, "span"); // You can use "div" as well if you prefer
+			builder.AddContent(13, PostInputText); // Use the variable holding the text to be displayed
+			builder.CloseElement(); // Close input
+			
+			builder.CloseElement(); // Close flex container
 		}
 
 		private void OnBlur()

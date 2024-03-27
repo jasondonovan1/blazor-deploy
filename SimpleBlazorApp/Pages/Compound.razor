@@ -18,13 +18,19 @@
 </p>
 
 
-<NumericInput LabelText="Enter Start Value: "  Class="numeric-input" Value="@Number" ValueChanged="@((decimal value) => Number = value)" />
+<NumericInput LabelText="Enter Start Balance: "  Class="numeric-input" Value="@Number" ValueChanged="@((decimal value) => Number = value)" />
 
 <NumericInput LabelText="Enter Periodic Additions: "  Class="numeric-input" Value="@NumberAdds" ValueChanged="@((decimal value) => NumberAdds = value)" />
 
-<NumericInputInt LabelText="Enter Average % apr: " Class="numeric-input" Value="@NumberApr" ValueChanged="@((int value) => NumberApr = value)" />
+<NumericInput 
+	LabelText="Enter Annual Charges%:"
+    Class="numeric-input" 
+	Value="@ChargesApr" 
+	ValueChanged="@((decimal value) => ChargesApr = value)" />
 
-<NumericInputInt LabelText="Enter Number of Years: " Class="numeric-input" Value="@Years" ValueChanged="@((int value) => Years = value)" />
+<NumericInputInt PostInputText=" charges are calculated post growth"  LabelText="Enter Average % apr: " Class="numeric-input" Value="@NumberApr" ValueChanged="@((int value) => NumberApr = value)" />
+
+<NumericInputInt PostInputText=" "  LabelText="Enter Number of Years: " Class="numeric-input" Value="@Years" ValueChanged="@((int value) => Years = value)" />
  
 <p>
 	
@@ -42,6 +48,7 @@
 		End Balance:
 	</p>
 	<input class="input-result" type="text" value="@FormattedFinalAmount" readonly />
+	
 </div>
 
 <div class="element-container">
@@ -51,30 +58,38 @@
 	<input class="input-result" type="text" value="@FormattedProfit" readonly />
 </div>
 
+<div class="element-container">
+	<p>
+		Total Charges:
+	</p>
+	<input class="input-result" type="text" value="@FormattedCharges" readonly />
+	
+</div>
+
 
 
 @code 
 {
 	private decimal finalAmount;
 	private decimal profit;
+	private decimal totalcharges;
 	// get the starting value
 	private decimal Number { get; set; } = 1000.00m; // Initial value set to 0
-														// get the periodic additions
+	private decimal ChargesApr { get; set; } = 0.0m; // Initial value set to 0
 	private decimal NumberAdds { get; set; } = 100.00m; // Initial value set to 0
 	private int NumberApr { get; set; } = 1; // Initial value set to 7%
 	private int Years { get; set; } = 1; // Initial value set to 5
 
+
 	private CalcServiceCompound calculationService = new CalcServiceCompound();
-	private decimal calculationResult; // Holds the calculation result
-	//private string FormattedCalculationResult => calculationResult.ToString("N2", CultureInfo.InvariantCulture);
 
 	private string FormattedFinalAmount => finalAmount.ToString("N2", CultureInfo.InvariantCulture);
 	private string FormattedProfit => profit.ToString("N2", CultureInfo.InvariantCulture);
-
+	private string FormattedCharges => totalcharges.ToString("N2", CultureInfo.InvariantCulture);
 
 	private void CalcServiceCompound()
 	{
-		 (finalAmount, profit) = calculationService.CalculateSomething(Number, NumberAdds, NumberApr, Years);
+		(finalAmount, profit, totalcharges) = calculationService.CalculateSomething(Number, NumberAdds, NumberApr, Years, ChargesApr);
 	}
 	
 
