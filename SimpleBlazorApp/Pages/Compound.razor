@@ -1,6 +1,7 @@
 ﻿
 @page "/compound"
 @using System.Globalization
+@using System.Collections.Generic;
 
 
 <PageTitle>Compound</PageTitle>
@@ -73,12 +74,15 @@
 	private decimal finalAmount;
 	private decimal profit;
 	private decimal totalcharges;
+	List<decimal> yearAmountList = new List<decimal>();
 	// get the starting value
 	private decimal Number { get; set; } = 1000.00m; // Initial value set to 0
 	private decimal ChargesApr { get; set; } = 0.0m; // Initial value set to 0
 	private decimal NumberAdds { get; set; } = 100.00m; // Initial value set to 0
 	private int NumberApr { get; set; } = 1; // Initial value set to 7%
 	private int Years { get; set; } = 1; // Initial value set to 5
+
+	
 
 
 	private CalcServiceCompound calculationService = new CalcServiceCompound();
@@ -89,7 +93,7 @@
 
 	private void CalcServiceCompound()
 	{
-		(finalAmount, profit, totalcharges) = calculationService.CalculateSomething(Number, NumberAdds, NumberApr, Years, ChargesApr);
+		(finalAmount, profit, totalcharges, yearAmountList) = calculationService.CalculateSomething(Number, NumberAdds, NumberApr, Years, ChargesApr);
 	}
 	
 
